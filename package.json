@@ -1,0 +1,46 @@
+{
+  "name": "corelogger",
+  "version": "0.0.1",
+  "main": "src/index.js",
+  "license": "MIT",
+  "node": ">=0.12.0",
+  "dependencies": {
+    "aws-sdk": "^2.1.23",
+    "moment": "^2.10.6",
+    "joi": "^6.0.8",
+    "lodash": "^3.6.0",
+    "winston": "^1.0.0",
+    "winston-logstash": "^0.1.11"
+  },
+   "dependencies": {
+    "joi": "^6.0.8",
+    "lodash": "^3.6.0",
+    "moment": "^2.10.2",
+    "winston": "^1.0.0",
+    "winston-logstash": "^0.1.11"
+  },
+  "devDependencies": {
+    "boom": "^2.7.0",
+    "del": "^1.1.1",
+    "gulp": "^3.8.11",
+    "gulp-bump": "^0.3.0",
+    "gulp-mocha": "^2.0.1",
+    "gulp-print": "^1.1.0",
+    "gulp-shell": "^0.4.0",
+    "mocha": "^2.2.1",
+    "vinyl-paths": "^1.0.0"
+  }
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/reharik/core_logger.git"
+  },
+  "author": "Raif Harik",
+  "bugs": {
+    "url": "https://github.com/reharik/core_logger/issues"
+  },
+  "homepage": "https://github.com/reharik/core_logger#readme",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "description": ""
+}
