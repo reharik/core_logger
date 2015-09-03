@@ -236,10 +236,6 @@ var Logger = function(options){
     }
 
     return {
-        changeOptions :function(options){
-            validate(internals.schema.system, options.system);
-            internals.options.system = _.assign(internals.options.system, options.system);
-        },
         getContext : function(){return internals.context;},
         addConsoleSink : addConsoleSink,
         addDailyRotateFileSink : addDailyRotateFileSink,
