@@ -10,12 +10,7 @@ var logger = new _logger({
             environment: process.env.ENVIROMENT || 'dev'
         }
     });
-    logger.addConsoleSink({
-        level:  'silly',
-        colorize: true
-
-    }).info("added Console Sink")
-        .addDailyRotateFileSink({
+    logger.addDailyRotateFileSink({
             level:  'info',
             filename: "/" + process.env.APPLICATION_NAME + ".log"
         })
