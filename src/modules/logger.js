@@ -5,6 +5,7 @@ var Winston = require("winston"),
     OS = require("os"),
     Enum = require("./enum.js"),
     TestLogger = require("./testLogger.js");
+var moment = require('moment');
 
 require("./sqsLogstash");
 require("winston-logstash");
@@ -82,6 +83,9 @@ var Logger = function(options){
 
     function addConsoleSink(options){
         validate(internals.schema.console, options);
+        options.formatter = function (x) {
+            return '[' + x.meta.level + '] module: '+internals.options.moduleName || 'module' +' msg: ' + x.meta.message + ' | ' + moment().format('h:mm:ss a');
+        };
         internals.options.console = _.assign(internals.options.console, options);
         internals.context.logger.add(Winston.transports.Console, internals.options.console);
         return this;
@@ -232,6 +236,10 @@ var Logger = function(options){
     }
 
     return {
+        changeOptions :function(options){
+            validate(internals.schema.system, options.system);
+            internals.options.system = _.assign(internals.options.system, options.system);
+        },
         getContext : function(){return internals.context;},
         addConsoleSink : addConsoleSink,
         addDailyRotateFileSink : addDailyRotateFileSink,
