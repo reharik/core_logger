@@ -5,14 +5,7 @@
   "license": "MIT",
   "node": ">=0.12.0",
   "dependencies": {
-    "aws-sdk": "^2.1.23",
-    "moment": "^2.10.6",
-    "joi": "^6.0.8",
-    "lodash": "^3.6.0",
-    "winston": "^1.0.0",
-    "winston-logstash": "^0.1.11"
-  },
-   "dependencies": {
+    "aws-sdk": "^2.1.49",
     "joi": "^6.0.8",
     "lodash": "^3.6.0",
     "moment": "^2.10.2",
