@@ -10,7 +10,7 @@ module.exports = function(_options) {
     var logger = new _logger({
         system: {
             applicationName: process.env.APPLICATION_NAME || 'root',
-            environment: process.env.ENVIROMENT || 'development'
+            environment: process.env.ENVIROMENT || 'dev'
         }
     });
     logger.addConsoleSink({
