@@ -83,9 +83,6 @@ var Logger = function(options){
 
     function addConsoleSink(options){
         validate(internals.schema.console, options);
-        options.formatter = function (x) {
-            return '[' + x.meta.level + '] module: '+internals.options.moduleName || 'module' +' msg: ' + x.meta.message + ' | ' + moment().format('h:mm:ss a');
-        };
         internals.options.console = _.assign(internals.options.console, options);
         internals.context.logger.add(Winston.transports.Console, internals.options.console);
         return this;
