@@ -7,7 +7,7 @@ var Winston = require("winston"),
     TestLogger = require("./testLogger.js");
 var moment = require('moment');
 
-require("./sqsLogstash");
+//require("./sqsLogstash");
 require("winston-logstash");
 
 var Logger = function(options){
