@@ -5,7 +5,6 @@
   "license": "MIT",
   "node": ">=0.12.0",
   "dependencies": {
-    "joi": "^6.0.8",
     "lodash": "^3.6.0",
     "moment": "^2.10.2",
     "winston": "^1.0.0",
