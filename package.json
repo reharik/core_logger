@@ -5,16 +5,12 @@
   "license": "MIT",
   "node": ">=0.12.0",
   "dependencies": {
-    "joi": "^7.0.1",
-    "lodash": "^3.6.0",
-    "moment": "^2.10.2",
-    "winston": "^1.0.0",
-    "winston-logstash": "^0.1.11"
+    "moment": "^2.17.1",
+    "os": "^0.1.1",
+    "winston": "^2.3.0",
+    "winston-logstash": "^0.3.0"
   },
-  "devDependencies": {
-    "mocha": "^2.2.1",
-    "vinyl-paths": "^1.0.0"
-  },
+  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/reharik/core_logger.git"
