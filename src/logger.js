@@ -11,7 +11,7 @@ module.exports = function () {
     winston.add(winston.transports.Logstash, {
         port: 13302,
         node_name: os.hostname(),
-        host: "wk_logstash"
+        host: "mf_logstash"
     });
     // }
     // else {
