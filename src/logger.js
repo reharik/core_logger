@@ -7,23 +7,23 @@ module.exports = function () {
     var useJson = process.env.LOGGING_USE_JASON;
     winston.level = process.env.LOGGING_LEVEL;
     winston.remove(winston.transports.Console);
-    // if (useJson) {
-    winston.add(winston.transports.Logstash, {
-        port: 13302,
-        node_name: os.hostname(),
-        host: "mf_logstash"
-    });
-    // }
-    // else {
-    winston.add(winston.transports.Console, {
-        handleExceptions: true,
-        prettyPrint: true,
-        colorize: true,
-        silent: false,
-        timestamp: true,
-        json: useJson
-    });
-    // }
+    if (useJson) {
+        winston.add(winston.transports.Logstash, {
+            port: 13302,
+            node_name: os.hostname(),
+            host: "mf_logstash"
+        });
+    }
+    else {
+        winston.add(winston.transports.Console, {
+            handleExceptions: true,
+            prettyPrint: true,
+            colorize: true,
+            silent: false,
+            timestamp: true,
+            json: useJson
+        });
+    }
 
     var message = {
         system: {
