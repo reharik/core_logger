@@ -21,7 +21,7 @@ module.exports = function () {
             colorize: true,
             silent: false,
             timestamp: true,
-            json: useJson
+            json: false
         });
     }
 
