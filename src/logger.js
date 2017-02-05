@@ -47,7 +47,7 @@ module.exports = function () {
     function mapError(err, message) {
         message.message = err.message;
         message.stackTrace = err.stack;
-        err.keys.forEach(key => {
+        err.keys && err.keys.forEach(key => {
             if (isNumeric(err[key]))
                 message.nprops[key] = err[key];
             else if (typeof (err[key]) === 'string')
