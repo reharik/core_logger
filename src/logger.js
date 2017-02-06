@@ -80,16 +80,18 @@ module.exports = function () {
 
     function mapMessage(input, level) {
         var newMessage = Object.assign({}, message);
-        if (input == null)
+        if (input == null) {
             return;
+        }
         newMessage.level = level;
 
-        if (input instanceof Error)
+        if (input instanceof Error) {
             return mapError(input, newMessage);
-
-        if (input.error instanceof Error)
+        }
+        if (input.error instanceof Error) {
             return mapError(input.error, newMessage);
-        newMessage.message = input;
+        }
+        newMessage.message = JSON.stringify(input);
         return newMessage;
     }
 
