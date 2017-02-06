@@ -57,8 +57,7 @@ module.exports = function () {
         nprops: {},
         tags: [],
         message: "",
-        type: "coreLogger",
-        "@timestamp": moment().toISOString()
+        type: "coreLogger"
     };
 
     function isNumeric(value) {
@@ -84,6 +83,7 @@ module.exports = function () {
             return;
         }
         newMessage.level = level;
+        message["@timestamp"] = moment().toISOString();
 
         if (input instanceof Error) {
             return mapError(input, newMessage);
