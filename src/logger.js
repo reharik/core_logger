@@ -9,7 +9,7 @@ module.exports = function () {
     winston.configure({
         transports: [
             new (winston.transports.Logstash)({
-                port: 13302,
+                port: 5000,
                 node_name: os.hostname(),
                 host: "mf_logstash"
             }),
