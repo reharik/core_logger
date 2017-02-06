@@ -91,7 +91,7 @@ module.exports = function () {
         if (input.error instanceof Error) {
             return mapError(input.error, newMessage);
         }
-        newMessage.message = JSON.stringify(input);
+        newMessage.message = input;
         return newMessage;
     }
 
