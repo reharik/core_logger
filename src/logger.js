@@ -7,14 +7,14 @@ module.exports = function () {
     var useTransports = process.env.LOGGING_TRANSPORTS;
 
     var transports = [];
-    if(useTransports.includes('logstash'))
+    if(useTransports.indexOf('logstash') >=0 )
         transports.push(
         new (winston.transports.Logstash)({
             port: 5000,
             node_name: os.hostname(),
             host: "mf_logstash"
         }));
-    if(useTransports.includes('console'))
+    if(useTransports.indexOf('console') >= 0)
         transports.push(
           new (winston.transports.Console)({
             handleExceptions: true,
