@@ -4,24 +4,29 @@ var os = require('os');
 require('winston-logstash');
 
 module.exports = function () {
-    var useJson = process.env.LOGGING_USE_JASON;
+    var useTransports = process.env.LOGGING_TRANSPORTS;
 
+    var transports = [];
+    if(useTransports.includes('logstash'))
+        transports.push(
+        new (winston.transports.Logstash)({
+            port: 5000,
+            node_name: os.hostname(),
+            host: "mf_logstash"
+        }));
+    if(useTransports.includes('console'))
+        transports.push(
+          new (winston.transports.Console)({
+            handleExceptions: true,
+            prettyPrint: true,
+            colorize: true,
+            silent: false,
+            timestamp: true,
+            json: false
+        }));
+    
     winston.configure({
-        transports: [
-            new (winston.transports.Logstash)({
-                port: 5000,
-                node_name: os.hostname(),
-                host: "mf_logstash"
-            }),
-            new (winston.transports.Console)({
-                handleExceptions: true,
-                prettyPrint: true,
-                colorize: true,
-                silent: false,
-                timestamp: true,
-                json: false
-            })
-        ],
+        transports,
         level: process.env.LOGGING_LEVEL || 'silly'
     });
 
