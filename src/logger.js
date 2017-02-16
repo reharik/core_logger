@@ -13,7 +13,13 @@ module.exports = function () {
             port: 5000,
             node_name: os.hostname(),
             host: "mf_logstash",
-            formatter: (options) => mapMessage(options.message, options.level)
+            formatter: (options) => {
+                console.log('==========options=========');
+                console.log(options);
+                console.log('==========END options=========');
+                
+                return mapMessage(options.message, options.level)
+            }
         }));
     if(useTransports.indexOf('console') >= 0)
         transports.push(
