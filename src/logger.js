@@ -12,14 +12,8 @@ module.exports = function () {
         new (winston.transports.Logstash)({
             port: 5000,
             node_name: os.hostname(),
-            host: "mf_logstash",
-            formatter: (options) => {
-                console.log('==========options=========');
-                console.log(options);
-                console.log('==========END options=========');
-                
-                return mapMessage(options.message, options.level)
-            }
+            host: "mf_logstash"
+
         }));
     if(useTransports.indexOf('console') >= 0)
         transports.push(
@@ -29,7 +23,14 @@ module.exports = function () {
             colorize: true,
             silent: false,
             timestamp: true,
-            json: false
+            json: false,
+              formatter: (options) => {
+                  console.log('==========options=========');
+                  console.log(options);
+                  console.log('==========END options=========');
+
+                  return mapMessage(options.message, options.level)
+              }
         }));
     
     winston.configure({
