@@ -12,7 +12,8 @@ module.exports = function () {
         new (winston.transports.Logstash)({
             port: 5000,
             node_name: os.hostname(),
-            host: "mf_logstash"
+            host: "mf_logstash",
+            formatter: (options) => mapMessage(options.message, options.level)
         }));
     if(useTransports.indexOf('console') >= 0)
         transports.push(
@@ -29,27 +30,6 @@ module.exports = function () {
         transports,
         level: process.env.LOGGING_LEVEL || 'silly'
     });
-
-    // winston.level = process.env.LOGGING_LEVEL;
-    //
-    // winston.remove(winston.transports.Console);
-    // if (useJson) {
-    //     winston.add(winston.transports.Logstash, {
-    //         port: 13302,
-    //         node_name: os.hostname(),
-    //         host: "mf_logstash"
-    //     });
-    // }
-    // else {
-    //     winston.add(winston.transports.Console, {
-    //         handleExceptions: true,
-    //         prettyPrint: true,
-    //         colorize: true,
-    //         silent: false,
-    //         timestamp: true,
-    //         json: false
-    //     });
-    // }
 
     var message = {
         system: {
@@ -101,30 +81,15 @@ module.exports = function () {
     }
 
     var trace = (message) => {
-        winston.silly(mapMessage(message, 'trace'));
+        winston.silly(message);
     };
 
-    var debug = (message) => {
-        winston.debug(mapMessage(message, 'debug'));
-    };
-
-    var info = (message) => {
-        winston.info(mapMessage(message, 'info'));
-    };
-
-    var warn = (message) => {
-        winston.warn(mapMessage(message, 'warn'));
-    };
-
-    var error = (message) => {
-        winston.error(mapMessage(message, 'error'));
-    };
 
     return {
         trace,
-        debug,
-        info,
-        warn,
-        error
+        debug: winston.debug,
+        info: winston.info,
+        warn: winston.warn,
+        error: winston.error
     }
 };
