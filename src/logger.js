@@ -13,7 +13,6 @@ module.exports = function () {
             port: 5000,
             node_name: os.hostname(),
             host: "mf_logstash"
-
         }));
     if(useTransports.indexOf('console') >= 0)
         transports.push(
@@ -25,11 +24,11 @@ module.exports = function () {
             timestamp: true,
             json: false,
               formatter: (options) => {
-                  console.log('==========options=========');
-                  console.log(options);
-                  console.log('==========END options=========');
-
-                  return mapMessage(options.message, options.level)
+               console.log('==========options=========');
+               console.log(options);
+               console.log('==========END options=========');
+               
+                  return options.message;
               }
         }));
     
@@ -88,15 +87,30 @@ module.exports = function () {
     }
 
     var trace = (message) => {
-        winston.silly(message);
+        winston.silly(mapMessage(message, 'trace'));
     };
 
+    var debug = (message) => {
+        winston.debug(mapMessage(message, 'debug'));
+    };
+
+    var info = (message) => {
+        winston.info(mapMessage(message, 'info'));
+    };
+
+    var warn = (message) => {
+        winston.warn(mapMessage(message, 'warn'));
+    };
+
+    var error = (message) => {
+        winston.error(mapMessage(message, 'error'));
+    };
 
     return {
         trace,
-        debug: winston.debug,
-        info: winston.info,
-        warn: winston.warn,
-        error: winston.error
+        debug,
+        info,
+        warn,
+        error
     }
 };
