@@ -17,20 +17,16 @@ module.exports = function () {
     if(useTransports.indexOf('console') >= 0)
         transports.push(
           new (winston.transports.Console)({
-            handleExceptions: true,
-            prettyPrint: true,
-            colorize: true,
-            silent: false,
-            timestamp: true,
-            json: false,
+              handleExceptions: true,
+              prettyPrint: true,
+              colorize: true,
+              silent: false,
+              timestamp: true,
+              json: false,
               formatter: (options) => {
-               console.log('==========options=========');
-               console.log(options);
-               console.log('==========END options=========');
-               
-                  return options.message;
+                  return options.meta.message;
               }
-        }));
+          }));
     
     winston.configure({
         transports,
