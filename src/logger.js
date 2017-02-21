@@ -23,8 +23,8 @@ module.exports = function () {
               silent: false,
               timestamp: true,
               json: false,
-              formatter: (options) => {
-                  return options.meta.message;
+              formatter: function(x) {
+                  return `[${x.meta.level}] module: ${process.env.APPLICATION_NAME} msg: ${x.meta.message} | ${moment().format('h:mm:ss a')}`;
               }
           }));
     
