@@ -32,7 +32,7 @@ module.exports = function () {
               timestamp: true,
               json: false,
               formatter: (x) => {
-                  return `[${x.meta.level || x.level}] module: ${config.app.applicationName} msg: ${x.meta.message || x.message} | ${moment().format('h:mm:ss a')}`;
+                  return `[${x.meta.level || x.level}] module: ${process.env.APPLICATION_NAME} msg: ${x.meta.message || x.message} | ${moment().format('h:mm:ss a')}`;
               }
           }));
     
