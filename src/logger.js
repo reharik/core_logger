@@ -7,14 +7,22 @@ module.exports = function () {
     var useTransports = process.env.LOGGING_TRANSPORTS;
 
     var transports = [];
-    if(useTransports.indexOf('logstash') >=0 )
-        transports.push(
-        new (winston.transports.Logstash)({
+    if(useTransports && useTransports.indexOf('logstash') >=0 )
+    {
+        var logstash = new (winston.transports.Logstash)({
             port: 5000,
             node_name: os.hostname(),
-            host: "mf_logstash"
-        }));
-    if(useTransports.indexOf('console') >= 0)
+            host: "mf_logstash",
+            // max_connect_retries: 10,
+            timeout_connect_retries: 1500
+        });
+        logstash.on('error', function(err) {
+            console.error(err); // replace with your own functionality here
+        });
+        transports.push(logstash);
+    }
+
+    if(!useTransports || useTransports.indexOf('console') >= 0)
         transports.push(
           new (winston.transports.Console)({
               handleExceptions: true,
@@ -23,8 +31,8 @@ module.exports = function () {
               silent: false,
               timestamp: true,
               json: false,
-              formatter: function(x) {
-                  return `[${x.meta.level}] module: ${process.env.APPLICATION_NAME} msg: ${x.meta.message} | ${moment().format('h:mm:ss a')}`;
+              formatter: (x) => {
+                  return `[${x.meta.level || x.level}] module: ${config.app.applicationName} msg: ${x.meta.message || x.message} | ${moment().format('h:mm:ss a')}`;
               }
           }));
     
