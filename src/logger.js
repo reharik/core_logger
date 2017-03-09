@@ -17,7 +17,7 @@ module.exports = function () {
             timeout_connect_retries: 1500
         });
         logstash.on('error', function(err) {
-            console.error(err); // replace with your own functionality here
+            // console.error(err); // replace with your own functionality here
         });
         transports.push(logstash);
     }
