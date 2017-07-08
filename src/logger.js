@@ -46,7 +46,7 @@ module.exports = function () {
               timestamp: true,
               json: false,
               formatter: (x) => {
-                  return `[${x.meta.level || x.level}] module: ${process.env.APPLICATION_NAME} msg: ${x.meta.message || x.message} | ${moment().format('h:mm:ss a')}`;
+                  return `[${x.meta.level || x.level}] module: ${process.env.APPLICATION_NAME} msg: ${x.meta.details || x.details} | ${moment().format('h:mm:ss a')}`;
               }
           }));
     
@@ -74,7 +74,7 @@ module.exports = function () {
     }
 
     function mapError(err, message) {
-        message.message = err.message;
+        message.details = err.message;
         message.stackTrace = err.stack;
         err.keys && err.keys.forEach(key => {
             if (isNumeric(err[key]))
