@@ -26,10 +26,12 @@ module.exports = function () {
   if(useTransports && useTransports.indexOf('loggly') >=0 )
   {
     var loggly = new (winston.transports.Loggly)({
-      token: "e16facd4-5b05-4f6f-b1ca-951d1f2f86c2",
+      token: process.env.LOGGLY_TOKEN,
       subdomain: "methodfitness",
       tags: ["Winston-NodeJS"],
-      json:true
+      json:true,
+      level: process.env.LOGGING_LEVEL || 'info,',
+      isBulk: true
     });
     transports.push(loggly);
   }
@@ -63,7 +65,7 @@ module.exports = function () {
         sprops: {},
         nprops: {},
         tags: [],
-        message: "",
+        details: "",
         type: "coreLogger"
     };
 
@@ -98,7 +100,7 @@ module.exports = function () {
         if (input.error instanceof Error) {
             return mapError(input.error, newMessage);
         }
-        newMessage.message = input;
+        newMessage.details = input;
         return newMessage;
     }
 
