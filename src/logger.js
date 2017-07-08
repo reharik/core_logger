@@ -2,6 +2,7 @@ var winston = require('winston');
 var moment = require('moment');
 var os = require('os');
 require('winston-logstash');
+require('winston-loggly-bulk');
 
 module.exports = function () {
     var useTransports = process.env.LOGGING_TRANSPORTS;
@@ -21,6 +22,17 @@ module.exports = function () {
         });
         transports.push(logstash);
     }
+
+  if(useTransports && useTransports.indexOf('loggly') >=0 )
+  {
+    var loggly = new (winston.transports.Loggly)({
+      token: "e16facd4-5b05-4f6f-b1ca-951d1f2f86c2",
+      subdomain: "methodfitness",
+      tags: ["Winston-NodeJS"],
+      json:true
+    });
+    transports.push(loggly);
+  }
 
     if(!useTransports || useTransports.indexOf('console') >= 0)
         transports.push(
