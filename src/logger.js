@@ -1,16 +1,16 @@
-var winston = require('winston');
-var moment = require('moment');
-var os = require('os');
+const winston = require('winston');
+const moment = require('moment');
+const os = require('os');
 require('winston-logstash');
 require('winston-loggly-bulk');
 
 module.exports = function () {
-    var useTransports = process.env.LOGGING_TRANSPORTS;
+    const useTransports = process.env.LOGGING_TRANSPORTS;
 
-    var transports = [];
+    let transports = [];
     if(useTransports && useTransports.indexOf('logstash') >=0 )
     {
-        var logstash = new (winston.transports.Logstash)({
+        let logstash = new (winston.transports.Logstash)({
             port: 5000,
             node_name: os.hostname(),
             host: "mf_logstash",
@@ -24,7 +24,7 @@ module.exports = function () {
     }
 
   if(useTransports && useTransports.indexOf('loggly') >=0 && !!process.env.LOGGLY_TOKEN) {
-    var loggly = new (winston.transports.Loggly)({
+    let loggly = new (winston.transports.Loggly)({
       token: process.env.LOGGLY_TOKEN,
       subdomain: "methodfitness",
       tags: ["Winston-NodeJS"],
@@ -53,7 +53,7 @@ module.exports = function () {
         level: process.env.LOGGING_LEVEL || 'silly'
     });
 
-    var message = {
+    let message = {
         system: {
             environment: process.env.ENV,
             applicationName: process.env.APPLICATION_NAME,
@@ -63,8 +63,7 @@ module.exports = function () {
         sprops: {},
         nprops: {},
         tags: [],
-        details: "",
-        type: "coreLogger"
+        details: ""
     };
 
     function isNumeric(value) {
@@ -85,7 +84,7 @@ module.exports = function () {
     }
 
     function mapMessage(input, level) {
-        var newMessage = Object.assign({}, message);
+        let newMessage = Object.assign({}, message);
         if (input == null) {
             return;
         }
@@ -102,23 +101,23 @@ module.exports = function () {
         return newMessage;
     }
 
-    var trace = (message) => {
+    const trace = (message) => {
         winston.silly(mapMessage(message, 'trace'));
     };
 
-    var debug = (message) => {
+    const debug = (message) => {
         winston.debug(mapMessage(message, 'debug'));
     };
 
-    var info = (message) => {
+    const info = (message) => {
         winston.info(mapMessage(message, 'info'));
     };
 
-    var warn = (message) => {
+    const warn = (message) => {
         winston.warn(mapMessage(message, 'warn'));
     };
 
-    var error = (message) => {
+    const error = (message) => {
         winston.error(mapMessage(message, 'error'));
     };
 
