@@ -85,7 +85,7 @@ module.exports = function () {
 
     function mapMessage(input, level) {
         let newMessage = Object.assign({}, message);
-        if (input == null) {
+        if (input === null) {
             return;
         }
         newMessage.level = level;
@@ -126,6 +126,7 @@ module.exports = function () {
         debug,
         info,
         warn,
-        error
+        error,
+        log: winston.log
     }
 };
