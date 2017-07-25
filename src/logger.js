@@ -1,6 +1,7 @@
 const winston = require('winston');
 const moment = require('moment');
 const os = require('os');
+const util = require('util');
 require('winston-logstash');
 require('winston-loggly-bulk');
 
