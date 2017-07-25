@@ -101,24 +101,39 @@ module.exports = function () {
         return newMessage;
     }
 
-    const trace = (message) => {
-        winston.silly(mapMessage(message, 'trace'));
+    const trace = (message, ...args) => {
+      if(args){
+        message = util.format(message, ...args)
+      }
+      winston.silly(mapMessage(message, 'trace'));
     };
 
-    const debug = (message) => {
-        winston.debug(mapMessage(message, 'debug'));
+    const debug = (message, ...args) => {
+      if(args){
+        message = util.format(message, ...args)
+      }
+      winston.debug(mapMessage(message, 'debug'));
     };
 
-    const info = (message) => {
-        winston.info(mapMessage(message, 'info'));
+    const info = (message, ...args) => {
+      if(args){
+        message = util.format(message, ...args)
+      }
+      winston.info(mapMessage(message, 'info'));
     };
 
-    const warn = (message) => {
-        winston.warn(mapMessage(message, 'warn'));
+    const warn = (message, ...args) => {
+      if(args){
+        message = util.format(message, ...args)
+      }
+      winston.warn(mapMessage(message, 'warn'));
     };
 
-    const error = (message) => {
-        winston.error(mapMessage(message, 'error'));
+    const error = (message, ...args) => {
+      if(args){
+        message = util.format(message, ...args)
+      }
+      winston.error(mapMessage(message, 'error'));
     };
 
     return {
@@ -126,7 +141,6 @@ module.exports = function () {
         debug,
         info,
         warn,
-        error,
-        log: winston.log
+        error
     }
 };
